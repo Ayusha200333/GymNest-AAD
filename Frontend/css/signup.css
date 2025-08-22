@@ -59,6 +59,7 @@ body::before {
 
 .form-label {
     color: black !important; /* all labels black */
+    font-weight: 600;
 }
 
 .form-control {
@@ -110,7 +111,8 @@ body::before {
 .auth-footer {
     text-align: center;
     margin-top: 20px;
-    color: black; /* footer text black */
+    color: white;
+    font-weight: bold;
 }
 
 .auth-footer a {
@@ -121,6 +123,7 @@ body::before {
 
 .auth-footer a:hover {
     color: #ff6b6b;
+    text-decoration: underline;
 }
 
 .password-field {
