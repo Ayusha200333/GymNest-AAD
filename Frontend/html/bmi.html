@@ -1,0 +1,714 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>BMI Calculator</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<!--    <style>-->
+<!--        body {-->
+<!--            background: linear-gradient(135deg, #2c3e50, #34495e);-->
+<!--            min-height: 100vh;-->
+<!--            font-family: 'Arial', sans-serif;-->
+<!--        }-->
+
+<!--        .calculator-container {-->
+<!--            background: rgba(52, 73, 94, 0.95);-->
+<!--            border-radius: 15px;-->
+<!--            padding: 2rem;-->
+<!--            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);-->
+<!--            color: white;-->
+<!--            max-width: 500px;-->
+<!--            margin: 2rem auto;-->
+<!--        }-->
+
+<!--        .calculator-title {-->
+<!--            font-size: 2.5rem;-->
+<!--            font-weight: bold;-->
+<!--            text-align: center;-->
+<!--            margin-bottom: 2rem;-->
+<!--            color: white;-->
+<!--        }-->
+
+<!--        .form-label {-->
+<!--            color: #ecf0f1;-->
+<!--            font-weight: 500;-->
+<!--            margin-bottom: 0.5rem;-->
+<!--        }-->
+
+<!--        .form-control, .form-select {-->
+<!--            background: rgba(255, 255, 255, 0.1);-->
+<!--            border: 1px solid rgba(255, 255, 255, 0.3);-->
+<!--            color: white;-->
+<!--            border-radius: 8px;-->
+<!--        }-->
+
+<!--        .form-control:focus, .form-select:focus {-->
+<!--            background: rgba(255, 255, 255, 0.15);-->
+<!--            border-color: #3498db;-->
+<!--            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);-->
+<!--            color: white;-->
+<!--        }-->
+
+<!--        .form-control::placeholder {-->
+<!--            color: rgba(255, 255, 255, 0.6);-->
+<!--        }-->
+
+<!--        .btn-calculate {-->
+<!--            background: #e74c3c;-->
+<!--            border: none;-->
+<!--            padding: 12px;-->
+<!--            font-size: 1.1rem;-->
+<!--            font-weight: bold;-->
+<!--            border-radius: 8px;-->
+<!--            transition: all 0.3s ease;-->
+<!--        }-->
+
+<!--        .btn-calculate:hover {-->
+<!--            background: #c0392b;-->
+<!--            transform: translateY(-2px);-->
+<!--        }-->
+
+<!--        .btn-clear {-->
+<!--            background: #e74c3c;-->
+<!--            border: none;-->
+<!--            padding: 12px;-->
+<!--            font-size: 1.1rem;-->
+<!--            font-weight: bold;-->
+<!--            border-radius: 8px;-->
+<!--            transition: all 0.3s ease;-->
+<!--        }-->
+
+<!--        .btn-clear:hover {-->
+<!--            background: #c0392b;-->
+<!--            transform: translateY(-2px);-->
+<!--        }-->
+
+<!--        .result-section {-->
+<!--            background: rgba(0, 0, 0, 0.2);-->
+<!--            border-radius: 10px;-->
+<!--            padding: 1.5rem;-->
+<!--            margin-top: 2rem;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .bmi-value {-->
+<!--            font-size: 2rem;-->
+<!--            font-weight: bold;-->
+<!--            margin: 1rem 0;-->
+<!--        }-->
+
+<!--        .bmi-category {-->
+<!--            font-size: 1.2rem;-->
+<!--            margin-bottom: 1rem;-->
+<!--        }-->
+
+<!--        .bmi-scale {-->
+<!--            display: flex;-->
+<!--            height: 30px;-->
+<!--            border-radius: 15px;-->
+<!--            overflow: hidden;-->
+<!--            margin: 1rem 0;-->
+<!--        }-->
+
+<!--        .scale-underweight {-->
+<!--            background: #e74c3c;-->
+<!--            flex: 1;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--            font-size: 0.8rem;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        .scale-normal {-->
+<!--            background: #f1c40f;-->
+<!--            flex: 1;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--            font-size: 0.8rem;-->
+<!--            font-weight: bold;-->
+<!--            color: #2c3e50;-->
+<!--        }-->
+
+<!--        .scale-overweight {-->
+<!--            background: #27ae60;-->
+<!--            flex: 1;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--            font-size: 0.8rem;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        .scale-obese {-->
+<!--            background: #8e44ad;-->
+<!--            flex: 1;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--            font-size: 0.8rem;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        .form-check-input:checked {-->
+<!--            background-color: #3498db;-->
+<!--            border-color: #3498db;-->
+<!--        }-->
+
+<!--        .form-check-label {-->
+<!--            color: #ecf0f1;-->
+<!--        }-->
+
+<!--        .height-inputs {-->
+<!--            display: flex;-->
+<!--            gap: 10px;-->
+<!--            align-items: center;-->
+<!--        }-->
+
+<!--        .height-inputs .form-control {-->
+<!--            flex: 1;-->
+<!--        }-->
+
+<!--        .height-inputs span {-->
+<!--            color: #ecf0f1;-->
+<!--            font-weight: 500;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <div class="calculator-container">-->
+<!--        <h1 class="calculator-title">BMI Calculator</h1>-->
+
+<!--        <form id="bmiForm">-->
+<!--            &lt;!&ndash; Age Input &ndash;&gt;-->
+<!--            <div class="mb-3">-->
+<!--                <label for="age" class="form-label">Age:</label>-->
+<!--                <input type="number" class="form-control" id="age" placeholder="Enter your age" min="1" max="120">-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Gender Selection &ndash;&gt;-->
+<!--            <div class="mb-3">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-6">-->
+<!--                        <div class="form-check">-->
+<!--                            <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>-->
+<!--                            <label class="form-check-label" for="male">Male</label>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-6">-->
+<!--                        <div class="form-check">-->
+<!--                            <input class="form-check-input" type="radio" name="gender" id="female" value="female">-->
+<!--                            <label class="form-check-label" for="female">Female</label>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Units Selection &ndash;&gt;-->
+<!--            <div class="mb-3">-->
+<!--                <label for="units" class="form-label">Units:</label>-->
+<!--                <select class="form-select" id="units" onchange="toggleUnits()">-->
+<!--                    <option value="imperial">Imperial (ft/in & lb)</option>-->
+<!--                    <option value="metric">Metric (cm & kg)</option>-->
+<!--                </select>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Height Input &ndash;&gt;-->
+<!--            <div class="mb-3">-->
+<!--                <label class="form-label">Height:</label>-->
+<!--                <div id="imperialHeight" class="height-inputs">-->
+<!--                    <input type="number" class="form-control" id="feet" placeholder="5" min="0" max="8">-->
+<!--                    <span>feet</span>-->
+<!--                    <input type="number" class="form-control" id="inches" placeholder="10" min="0" max="11">-->
+<!--                    <span>inches</span>-->
+<!--                </div>-->
+<!--                <div id="metricHeight" class="height-inputs" style="display: none;">-->
+<!--                    <input type="number" class="form-control" id="cm" placeholder="170" min="50" max="250">-->
+<!--                    <span>cm</span>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Weight Input &ndash;&gt;-->
+<!--            <div class="mb-3">-->
+<!--                <label class="form-label">Weight:</label>-->
+<!--                <div class="height-inputs">-->
+<!--                    <input type="number" class="form-control" id="weight" placeholder="160" min="1" max="1000">-->
+<!--                    <span id="weightUnit">pounds</span>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Buttons &ndash;&gt;-->
+<!--            <div class="row mb-3">-->
+<!--                <div class="col-12 mb-2">-->
+<!--                    <button type="button" class="btn btn-calculate w-100" onclick="calculateBMI()">Calculate</button>-->
+<!--                </div>-->
+<!--                <div class="col-12">-->
+<!--                    <button type="button" class="btn btn-clear w-100" onclick="clearForm()">Clear</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </form>-->
+
+<!--        &lt;!&ndash; Results Section &ndash;&gt;-->
+<!--        <div class="result-section" id="results" style="display: none;">-->
+<!--            <h3>Result</h3>-->
+<!--            <div class="bmi-value" id="bmiValue">BMI = &#45;&#45;</div>-->
+<!--            <div class="bmi-category" id="bmiCategory">(-&#45;&#45;)</div>-->
+
+<!--            <div class="bmi-scale">-->
+<!--                <div class="scale-underweight">Underweight</div>-->
+<!--                <div class="scale-normal">Normal</div>-->
+<!--                <div class="scale-overweight">Overweight</div>-->
+<!--                <div class="scale-obese">Obesity</div>-->
+<!--            </div>-->
+
+<!--            <div id="healthyRange">Healthy BMI range: 18.5 - 25</div>-->
+<!--            <div id="healthyWeight">Healthy weight for your height: &#45;&#45;</div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--<script>-->
+<!--    function toggleUnits() {-->
+<!--        const units = document.getElementById('units').value;-->
+<!--        const imperialHeight = document.getElementById('imperialHeight');-->
+<!--        const metricHeight = document.getElementById('metricHeight');-->
+<!--        const weightUnit = document.getElementById('weightUnit');-->
+
+<!--        if (units === 'metric') {-->
+<!--            imperialHeight.style.display = 'none';-->
+<!--            metricHeight.style.display = 'flex';-->
+<!--            weightUnit.textContent = 'kg';-->
+<!--            document.getElementById('weight').placeholder = '70';-->
+<!--        } else {-->
+<!--            imperialHeight.style.display = 'flex';-->
+<!--            metricHeight.style.display = 'none';-->
+<!--            weightUnit.textContent = 'pounds';-->
+<!--            document.getElementById('weight').placeholder = '160';-->
+<!--        }-->
+<!--    }-->
+
+<!--    function calculateBMI() {-->
+<!--        const units = document.getElementById('units').value;-->
+<!--        const weight = parseFloat(document.getElementById('weight').value);-->
+<!--        let height;-->
+
+<!--        if (!weight || weight <= 0) {-->
+<!--            alert('Please enter a valid weight');-->
+<!--            return;-->
+<!--        }-->
+
+<!--        if (units === 'imperial') {-->
+<!--            const feet = parseFloat(document.getElementById('feet').value) || 0;-->
+<!--            const inches = parseFloat(document.getElementById('inches').value) || 0;-->
+
+<!--            if (feet === 0 && inches === 0) {-->
+<!--                alert('Please enter a valid height');-->
+<!--                return;-->
+<!--            }-->
+
+<!--            // Convert to inches, then to meters-->
+<!--            const totalInches = (feet * 12) + inches;-->
+<!--            height = totalInches * 0.0254; // Convert inches to meters-->
+<!--            const weightKg = weight * 0.453592; // Convert pounds to kg-->
+
+<!--            var bmi = weightKg / (height * height);-->
+<!--        } else {-->
+<!--            const cm = parseFloat(document.getElementById('cm').value);-->
+
+<!--            if (!cm || cm <= 0) {-->
+<!--                alert('Please enter a valid height');-->
+<!--                return;-->
+<!--            }-->
+
+<!--            height = cm / 100; // Convert cm to meters-->
+<!--            var bmi = weight / (height * height);-->
+<!--        }-->
+
+<!--        // Display results-->
+<!--        document.getElementById('results').style.display = 'block';-->
+<!--        document.getElementById('bmiValue').textContent = `BMI = ${bmi.toFixed(1)}`;-->
+
+<!--        let category, categoryColor;-->
+<!--        if (bmi < 18.5) {-->
+<!--            category = 'Underweight';-->
+<!--            categoryColor = '#e74c3c';-->
+<!--        } else if (bmi < 25) {-->
+<!--            category = 'Normal weight';-->
+<!--            categoryColor = '#27ae60';-->
+<!--        } else if (bmi < 30) {-->
+<!--            category = 'Overweight';-->
+<!--            categoryColor = '#f39c12';-->
+<!--        } else {-->
+<!--            category = 'Obesity';-->
+<!--            categoryColor = '#8e44ad';-->
+<!--        }-->
+
+<!--        const categoryElement = document.getElementById('bmiCategory');-->
+<!--        categoryElement.textContent = `(${category})`;-->
+<!--        categoryElement.style.color = categoryColor;-->
+
+<!--        // Calculate healthy weight range-->
+<!--        const minHealthyWeight = 18.5 * (height * height);-->
+<!--        const maxHealthyWeight = 24.9 * (height * height);-->
+
+<!--        let weightRangeText;-->
+<!--        if (units === 'imperial') {-->
+<!--            const minLbs = Math.round(minHealthyWeight * 2.20462);-->
+<!--            const maxLbs = Math.round(maxHealthyWeight * 2.20462);-->
+<!--            weightRangeText = `${minLbs} - ${maxLbs} lbs`;-->
+<!--        } else {-->
+<!--            weightRangeText = `${Math.round(minHealthyWeight)} - ${Math.round(maxHealthyWeight)} kg`;-->
+<!--        }-->
+
+<!--        document.getElementById('healthyWeight').textContent = `Healthy weight for your height: ${weightRangeText}`;-->
+<!--    }-->
+
+<!--    function clearForm() {-->
+<!--        document.getElementById('bmiForm').reset();-->
+<!--        document.getElementById('results').style.display = 'none';-->
+<!--        document.getElementById('male').checked = true;-->
+<!--        toggleUnits(); // Reset to default units display-->
+<!--    }-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern BMI Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #111; /* dark background */
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .calculator-container {
+            background: #1c1c1c;
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(255, 140, 0, 0.4);
+            color: white;
+        }
+
+        .calculator-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #ff6600;
+        }
+
+        .form-label {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .form-control, .form-select {
+            background: #222;
+            border: 1px solid #ff6600;
+            color: white;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background: #222;
+            border-color: #ff8c00;
+            box-shadow: 0 0 0 0.2rem rgba(255, 140, 0, 0.4);
+            color: white;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-calculate, .btn-clear {
+            background: #ff6600;
+            border: none;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            color: #fff;
+        }
+
+        .btn-calculate:hover, .btn-clear:hover {
+            background: #ff8c00;
+            transform: translateY(-3px);
+        }
+
+        .result-section {
+            background: #000;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3);
+        }
+
+        .bmi-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            color: #ff6600;
+        }
+
+        .bmi-category {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .bmi-scale {
+            display: flex;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .scale-underweight {
+            background: #ff4500;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .scale-normal {
+            background: #ff9900;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #111;
+        }
+
+        .scale-overweight {
+            background: #ffa500;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #111;
+        }
+
+        .scale-obese {
+            background: #ff3300;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .form-check-input:checked {
+            background-color: #ff6600;
+            border-color: #ff6600;
+        }
+
+        .form-check-label {
+            color: white;
+        }
+
+        .height-inputs {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .height-inputs .form-control {
+            flex: 1;
+        }
+
+        .height-inputs span {
+            color: #fff;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+<div class="calculator-container">
+    <h1 class="calculator-title">BMI Calculator</h1>
+
+    <form id="bmiForm">
+        <div class="mb-3">
+            <label for="age" class="form-label">Age:</label>
+            <input type="number" class="form-control" id="age" placeholder="Enter your age" min="1" max="120">
+        </div>
+
+        <div class="mb-3">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>
+                        <label class="form-check-label" for="male">Male</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                        <label class="form-check-label" for="female">Female</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="units" class="form-label">Units:</label>
+            <select class="form-select" id="units" onchange="toggleUnits()">
+                <option value="imperial">Imperial (ft/in & lb)</option>
+                <option value="metric">Metric (cm & kg)</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Height:</label>
+            <div id="imperialHeight" class="height-inputs">
+                <input type="number" class="form-control" id="feet" placeholder="5" min="0" max="8">
+                <span>ft</span>
+                <input type="number" class="form-control" id="inches" placeholder="10" min="0" max="11">
+                <span>in</span>
+            </div>
+            <div id="metricHeight" class="height-inputs" style="display: none;">
+                <input type="number" class="form-control" id="cm" placeholder="170" min="50" max="250">
+                <span>cm</span>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Weight:</label>
+            <div class="height-inputs">
+                <input type="number" class="form-control" id="weight" placeholder="160" min="1" max="1000">
+                <span id="weightUnit">lbs</span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-12 mb-2">
+                <button type="button" class="btn btn-calculate w-100" onclick="calculateBMI()">Calculate</button>
+            </div>
+            <div class="col-12">
+                <button type="button" class="btn btn-clear w-100" onclick="clearForm()">Clear</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="result-section" id="results" style="display: none;">
+        <h3>Result</h3>
+        <div class="bmi-value" id="bmiValue">BMI = --</div>
+        <div class="bmi-category" id="bmiCategory">(---)</div>
+
+        <div class="bmi-scale">
+            <div class="scale-underweight">Underweight</div>
+            <div class="scale-normal">Normal</div>
+            <div class="scale-overweight">Overweight</div>
+            <div class="scale-obese">Obesity</div>
+        </div>
+
+        <div id="healthyRange">Healthy BMI range: 18.5 - 24.9</div>
+        <div id="healthyWeight">Healthy weight for your height: --</div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function toggleUnits() {
+        const units = document.getElementById('units').value;
+        const imperialHeight = document.getElementById('imperialHeight');
+        const metricHeight = document.getElementById('metricHeight');
+        const weightUnit = document.getElementById('weightUnit');
+
+        if (units === 'metric') {
+            imperialHeight.style.display = 'none';
+            metricHeight.style.display = 'flex';
+            weightUnit.textContent = 'kg';
+            document.getElementById('weight').placeholder = '70';
+        } else {
+            imperialHeight.style.display = 'flex';
+            metricHeight.style.display = 'none';
+            weightUnit.textContent = 'lbs';
+            document.getElementById('weight').placeholder = '160';
+        }
+    }
+
+    function calculateBMI() {
+        const units = document.getElementById('units').value;
+        const weight = parseFloat(document.getElementById('weight').value);
+        let height;
+
+        if (!weight || weight <= 0) {
+            alert('Please enter a valid weight');
+            return;
+        }
+
+        if (units === 'imperial') {
+            const feet = parseFloat(document.getElementById('feet').value) || 0;
+            const inches = parseFloat(document.getElementById('inches').value) || 0;
+            if (feet === 0 && inches === 0) { alert('Please enter a valid height'); return; }
+            const totalInches = (feet * 12) + inches;
+            height = totalInches * 0.0254;
+            var bmi = (weight * 0.453592) / (height * height);
+        } else {
+            const cm = parseFloat(document.getElementById('cm').value);
+            if (!cm || cm <= 0) { alert('Please enter a valid height'); return; }
+            height = cm / 100;
+            var bmi = weight / (height * height);
+        }
+
+        document.getElementById('results').style.display = 'block';
+        document.getElementById('bmiValue').textContent = `BMI = ${bmi.toFixed(1)}`;
+
+        let category, categoryColor;
+        if (bmi < 18.5) { category = 'Underweight'; categoryColor = '#e74c3c'; }
+        else if (bmi < 25) { category = 'Normal weight'; categoryColor = '#27ae60'; }
+        else if (bmi < 30) { category = 'Overweight'; categoryColor = '#f39c12'; }
+        else { category = 'Obesity'; categoryColor = '#8e44ad'; }
+
+        const categoryElement = document.getElementById('bmiCategory');
+        categoryElement.textContent = `(${category})`;
+        categoryElement.style.color = categoryColor;
+
+        const minHealthyWeight = 18.5 * (height * height);
+        const maxHealthyWeight = 24.9 * (height * height);
+        let weightRangeText;
+        if (units === 'imperial') {
+            weightRangeText = `${Math.round(minHealthyWeight*2.20462)} - ${Math.round(maxHealthyWeight*2.20462)} lbs`;
+        } else {
+            weightRangeText = `${Math.round(minHealthyWeight)} - ${Math.round(maxHealthyWeight)} kg`;
+        }
+        document.getElementById('healthyWeight').textContent = `Healthy weight for your height: ${weightRangeText}`;
+    }
+
+    function clearForm() {
+        document.getElementById('bmiForm').reset();
+        document.getElementById('results').style.display = 'none';
+        document.getElementById('male').checked = true;
+        toggleUnits();
+    }
+</script>
+</body>
+</html>
